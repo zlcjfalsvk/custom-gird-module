@@ -27,20 +27,22 @@ export class AppComponent implements OnInit {
 
     setMethod(event) {
         try {
-            console.log(event);
-            eval('this.' + event);
+            console.log('eval에서 보낼 값 : ' + event);
+            new Function(eval('this.' + event))();
         } catch (e) { }
     }
+
+    onClick2(event) {
+        console.log('eval에서 받은 값 : ' + event);
+    }
+    
 
     onClick(event) {
         console.log('받았다');
         console.log(event);
     }
 
-    onClick2(event) {
-        console.log('받았다');
-        console.log(event);
-    }
+
 
     getData() {
         this.apiService.getData().subscribe(
