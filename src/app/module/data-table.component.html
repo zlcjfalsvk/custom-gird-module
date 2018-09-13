@@ -1,0 +1,26 @@
+<div class="table_area">
+  <table cellspacing="0" border="1" class="tbl_type">
+    <colgroup>
+        <col *ngFor="let item of this.columnsConfig" [width]='item.widthType === widthType.ABSOLUTE ? item.width : item.width + "%"'>    
+    </colgroup>
+    <thead>
+      <th *ngFor="let item of this.columnsConfig">
+        {{item.name}}
+      </th>
+    </thead>
+    <tbody>
+      <tr *ngFor="let item of this._rows">
+        <ng-container *ngFor="let column of this.columnsConfig">
+          <td *ngIf="column.dataType !== dataType.BUTTON; else Btn">
+            {{item[column.keyName]}}
+          </td>
+          <ng-template #Btn>
+            <td>
+              <button (click)='onClick(column)'>{{column.name}}</button>
+            </td>
+          </ng-template>
+        </ng-container>
+      </tr>
+    </tbody>
+  </table>
+</div>
