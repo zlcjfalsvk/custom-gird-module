@@ -78,8 +78,8 @@ export class DataTableComponent implements AfterViewInit, OnChanges {
         const str: string = event.toggle;
         const hasParam = event.toggle.substring(str.indexOf('(') + 1, str.lastIndexOf(')'));
         if (hasParam) {
-            str.replace(hasParam, this.getProp(item, hasParam).toString());
-            return this.myEvent.emit(str.replace(hasParam, this.getProp(item, hasParam).toString()));
+            const param = str.replace(hasParam, '\'' + this.getProp(item, hasParam).toString() + '\'');
+            return this.myEvent.emit(param);
         }
         this.myEvent.emit(event.toggle);
     }

@@ -26,11 +26,10 @@ export class AppComponent implements OnInit {
     }
 
     setMethod(event) {
-        // try {
-            // console.log(event);
-            
+        try {
+            console.log(event);
             eval('this.' + event);
-        // } catch (e) { }
+        } catch (e) { }
     }
 
     onClick(event) {
