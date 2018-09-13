@@ -25,10 +25,12 @@ export class AppComponent implements OnInit {
     ngOnInit() {
     }
 
-    setMethod(event: string) {
-        try {
+    setMethod(event) {
+        // try {
+            // console.log(event);
+            
             eval('this.' + event);
-        } catch (e) { }
+        // } catch (e) { }
     }
 
     onClick(event) {
@@ -37,6 +39,7 @@ export class AppComponent implements OnInit {
     }
 
     onClick2(event) {
+        console.log('받았다');
         console.log(event);
     }
 

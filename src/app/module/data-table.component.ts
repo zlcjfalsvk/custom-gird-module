@@ -8,7 +8,7 @@ import { Enum } from 'src/app/module/columns/enum';
     styleUrls: ['./data-table.component.css']
 })
 export class DataTableComponent implements AfterViewInit, OnChanges {
-    
+
 
     columnsConfig: QueryList<ColumnDirective>;
     _rows: any[];
@@ -58,15 +58,15 @@ export class DataTableComponent implements AfterViewInit, OnChanges {
 
     setRowData(row: any[], attr: string) {
         let _rows = row;
-        _rows.map(v => {     
+        _rows.map(v => {
             // v[attr] = eval('v.' + attr);            
-            v[attr] = this.getProp(v, attr);           
+            v[attr] = this.getProp(v, attr);
         });
         return _rows;
     }
 
 
-    getProp (obj: any[], desc: string) {
+    getProp(obj: any[], desc: string) {
         let arr = desc.split('.');
         while (arr.length) {
             obj = obj[arr.shift()];
@@ -74,9 +74,13 @@ export class DataTableComponent implements AfterViewInit, OnChanges {
         return obj;
     }
 
-    onClick(event) {
-        // console.log('자식 컴포넌트');
-        console.log(event.toggle);
+    onClick(item, event) {
+        const str: string = event.toggle;
+        const hasParam = event.toggle.substring(str.indexOf('(') + 1, str.lastIndexOf(')'));
+        if (hasParam) {
+            str.replace(hasParam, this.getProp(item, hasParam).toString());
+            return this.myEvent.emit(str.replace(hasParam, this.getProp(item, hasParam).toString()));
+        }
         this.myEvent.emit(event.toggle);
     }
 }
