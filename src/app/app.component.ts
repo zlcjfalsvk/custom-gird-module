@@ -25,10 +25,12 @@ export class AppComponent implements OnInit {
     ngOnInit() {
     }
 
-    setMethod(event) {
+    setMethod(event: string) {
         try {
             console.log('eval에서 보낼 값 : ' + event);
-            new Function(eval('this.' + event))();
+            const method = event.substring(0, event.indexOf('('));
+            const param = event.substring(event.indexOf('(') + 1 ,event.indexOf(')'));
+            this[method](param);
         } catch (e) { }
     }
 
